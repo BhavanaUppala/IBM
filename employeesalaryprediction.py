@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -134,19 +133,15 @@ class DataPreprocessor:
         """Transform new data using fitted encoders and scaler"""
         df_processed = df.copy()
 
-        # Encode categorical variables
         for col, le in self.label_encoders.items():
             df_processed[col + '_Encoded'] = le.transform(df_processed[col])
 
-        # Select and scale features
         X = df_processed[self.feature_columns]
         X_scaled = self.scaler.transform(X)
 
         return X_scaled
 
 # ==================== MODEL TRAINING ====================
-
-
 class SalaryPredictor:
     def __init__(self):
         self.models = {
@@ -218,7 +213,6 @@ class SalaryPredictor:
         if self.best_model is None:
             return "Model not trained yet"
 
-        # Create input dataframe
         input_data = pd.DataFrame({
             'Job_Title': [job_title],
             'Years_Experience': [experience],
